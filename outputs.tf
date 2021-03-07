@@ -50,5 +50,5 @@ output "ec2_instance_profile" {
 }
 
 output "minecraft_server" {
-  value = "${module.ec2_minecraft[0].public_ip}:${var.mc_port}"
+  value = "${module.ec2_minecraft.public_ip[0]}:${var.mc_port}"
 }

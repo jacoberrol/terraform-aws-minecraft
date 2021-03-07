@@ -44,13 +44,13 @@ variable "name" {
 variable "namespace" {
   description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
   type        = string
-  default     = "games"
+  default     = "oliverj.io"
 }
 
 variable "environment" {
   description = "Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT'"
   type        = string
-  default     = "games"
+  default     = "prod"
 }
 
 variable "tags" {
@@ -128,4 +128,3 @@ variable "allowed_cidrs" {
   type        = string
   default     = "0.0.0.0/0"
 }
-

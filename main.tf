@@ -22,6 +22,7 @@ locals {
 
 // Keep labels, tags consistent
 module "label" {
+  // source        = "git::https://github.com/cloudposse/terraform-null-label/tree/0.12.2"
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=master"
 
   namespace   = var.namespace
@@ -160,13 +161,13 @@ data "template_file" "user_data" {
     mc_bucket      = local.bucket
     mc_backup_freq = var.mc_backup_freq
     mc_version     = var.mc_version
-    mc_type        = var.mc_type   
+    mc_type        = var.mc_type
     java_mx_mem    = var.java_mx_mem
     java_ms_mem    = var.java_ms_mem
   }
 }
 
-// Security group for our instance - allows SSH and minecraft 
+// Security group for our instance - allows SSH and minecraft
 module "ec2_security_group" {
   source = "git@github.com:terraform-aws-modules/terraform-aws-security-group.git?ref=master"
 
@@ -228,4 +229,3 @@ module "ec2_minecraft" {
 
   tags = module.label.tags
 }
-
