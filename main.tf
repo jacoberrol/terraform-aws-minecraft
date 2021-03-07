@@ -185,6 +185,13 @@ module "ec2_security_group" {
       description = "Minecraft server"
       cidr_blocks = var.allowed_cidrs
     },
+    {
+      from_port   = var.puffer_port
+      to_port     = var.puffer_port
+      protocol    = "tcp"
+      description = "Puffer Panel"
+      cidr_blocks = var.allowed_cidrs
+    }
   ]
   egress_rules = ["all-all"]
 

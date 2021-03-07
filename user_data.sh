@@ -142,7 +142,8 @@ download_minecraft_server() {
 
 }
 
-MINECRAFT_JAR="minecraft_server.jar"
+# MINECRAFT_JAR="minecraft_server.jar"
+MINECRAFT_JAR="paper-1.16.4-437.jar"
 case $OS in
   Ubuntu*)
     ubuntu_linux_setup
@@ -161,9 +162,12 @@ esac
 
 # Download server if it doesn't exist on S3 already (existing from previous install)
 # To force a new server version, remove the server JAR from S3 bucket
-if [[ ! -e "${mc_root}/$MINECRAFT_JAR" ]]; then
-  download_minecraft_server
-fi
+#
+# SKIP DOWNLOADING MINECRAFT FOR NOW BECAUSE I'M USING OLIVER'S PAPER PLUGIN SERVER
+#
+# if [[ ! -e "${mc_root}/$MINECRAFT_JAR" ]]; then
+#   download_minecraft_server
+# fi
 
 # Cron job to sync data to S3 every five mins
 /bin/cat <<CRON > /etc/cron.d/minecraft
@@ -193,4 +197,3 @@ case $OS in
 esac
 
 exit 0
-
