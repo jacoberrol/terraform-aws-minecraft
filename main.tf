@@ -186,12 +186,33 @@ module "ec2_security_group" {
       cidr_blocks = var.allowed_cidrs
     },
     {
+      from_port   = var.ts_voice
+      to_port     = var.ts_voice
+      protocol    = "udp"
+      description = "Voice"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
+      from_port   = var.ts_fs
+      to_port     = var.ts_fs
+      protocol    = "tcp"
+      description = "File Transfer"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
+      from_port   = var.ts_sq
+      to_port     = var.ts_sq
+      protocol    = "tcp"
+      description = "Server Query"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
       from_port   = var.puffer_port
       to_port     = var.puffer_port
       protocol    = "tcp"
-      description = "Puffer Panel"
+      description = "Puffer Pannel"
       cidr_blocks = var.allowed_cidrs
-    }
+    },
   ]
   egress_rules = ["all-all"]
 
