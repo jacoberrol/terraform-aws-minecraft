@@ -66,6 +66,30 @@ variable "mc_port" {
   default     = 25565
 }
 
+variable "puffer_port" {
+  description = "TCP port for pufferpanel"
+  type = number
+  default = 8080
+}
+
+variable "ts_voice" {
+  description = "UDP port for teamspeak voice"
+  type = number
+  default = 9987
+}
+
+variable "ts_fs" {
+  description = "TCP port for teamspeak filetransfer"
+  type = number
+  default = 30033
+}
+
+variable "ts_sq" {
+  description = "TCP port for teamspeak serverquery"
+  type = number
+  default = 10011
+}
+
 variable "mc_root" {
   description = "Where to install minecraft on your instance"
   type        = string
