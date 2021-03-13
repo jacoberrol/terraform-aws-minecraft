@@ -59,12 +59,6 @@ variable "tags" {
   default     = {}
 }
 
-variable "puffer_port" {
-  description = "TCP port for puffer panel"
-  type = number
-  default = 8080
-}
-
 // Minecraft-specific defaults
 variable "mc_port" {
   description = "TCP port for minecraft"
