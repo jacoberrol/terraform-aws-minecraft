@@ -67,7 +67,7 @@ variable "mc_port" {
 }
 
 variable "puffer_port" {
-  description = "TCP port for pufferpanel"
+  description = "TCP port for Puffer Panel"
   type = number
   default = 8080
 }
