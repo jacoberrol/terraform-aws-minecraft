@@ -264,3 +264,11 @@ module "ec2_minecraft" {
 
   tags = module.label.tags
 }
+
+resource "aws_route53_record" "minecraft" {
+  zone_id = "Z3KSZF5UQKXK56"
+  name    = "minecraft.oliverj.io"
+  type    = "A"
+  ttl     = "300"
+  records = ["54.173.212.56"]
+}
