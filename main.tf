@@ -210,7 +210,14 @@ module "ec2_security_group" {
       from_port   = var.puffer_port
       to_port     = var.puffer_port
       protocol    = "tcp"
-      description = "Puffer Pannel"
+      description = "Puffer Panel"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
+      from_port   = var.geyser_port
+      to_port     = var.geyser_port
+      protocol    = "udp"
+      description = "Geyser Port"
       cidr_blocks = var.allowed_cidrs
     },
   ]

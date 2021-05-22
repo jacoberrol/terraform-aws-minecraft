@@ -72,6 +72,12 @@ variable "puffer_port" {
   default = 8080
 }
 
+variable "geyser_port" {
+  description = "UDP port for Geyser"
+  type = number
+  default = 19132
+}
+
 variable "ts_voice" {
   description = "UDP port for teamspeak voice"
   type = number
@@ -137,7 +143,7 @@ variable "associate_public_ip_address" {
 variable "ami" {
   description = "AMI to use for the instance - will default to latest Ubuntu"
   type        = string
-  default     = ""
+  default     = "ami-013f17f36f8b1fefb"
 }
 
 // https://aws.amazon.com/ec2/instance-types/
