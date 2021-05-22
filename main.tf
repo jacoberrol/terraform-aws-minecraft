@@ -186,6 +186,20 @@ module "ec2_security_group" {
       cidr_blocks = var.allowed_cidrs
     },
     {
+      from_port   = var.mc_port2
+      to_port     = var.mc_port2
+      protocol    = "tcp"
+      description = "Minecraft server"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
+      from_port   = var.mc_port3
+      to_port     = var.mc_port3
+      protocol    = "tcp"
+      description = "Minecraft server"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
       from_port   = var.ts_voice
       to_port     = var.ts_voice
       protocol    = "udp"

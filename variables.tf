@@ -66,6 +66,18 @@ variable "mc_port" {
   default     = 25565
 }
 
+variable "mc_port2" {
+  description = "TCP port for minecraft"
+  type        = number
+  default     = 25566
+}
+
+variable "mc_port3" {
+  description = "TCP port for minecraft"
+  type        = number
+  default     = 25567
+}
+
 variable "puffer_port" {
   description = "TCP port for Puffer Panel"
   type = number
