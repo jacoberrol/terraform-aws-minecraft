@@ -90,6 +90,18 @@ variable "secure_teradactyl_port" {
   default = 443
 }
 
+variable "daemon_teradactyl_port" {
+  description = "TCP port for Teradactyl"
+  type = number
+  default = 8080
+}
+
+variable "sftp_teradactyl_port" {
+  description = "TCP port for Teradactyl"
+  type = number
+  default = 2022
+}
+
 variable "geyser_port" {
   description = "UDP port for Geyser"
   type = number

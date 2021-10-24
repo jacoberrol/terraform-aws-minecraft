@@ -235,6 +235,20 @@ module "ec2_security_group" {
       cidr_blocks = var.allowed_cidrs
     },
     {
+      from_port   = var.daemon_teradactyl_port
+      to_port     = var.daemon_teradactyl_port
+      protocol    = "tcp"
+      description = "Teradactyl"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
+      from_port   = var.sftp_teradactyl_port
+      to_port     = var.sftp_teradactyl_port
+      protocol    = "tcp"
+      description = "Teradactyl"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
       from_port   = var.geyser_port
       to_port     = var.geyser_port
       protocol    = "udp"
@@ -291,5 +305,5 @@ resource "aws_route53_record" "minecraft" {
   name    = "minecraft.oliverj.io"
   type    = "A"
   ttl     = "300"
-  records = ["54.159.25.147"]
+  records = ["54.237.63.72"]
 }
