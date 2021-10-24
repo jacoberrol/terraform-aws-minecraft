@@ -102,6 +102,13 @@ variable "sftp_teradactyl_port" {
   default = 2022
 }
 
+variable "udp_teradactyl_port" {
+  description = "UDP port for Teradactyl"
+  type = number
+  default = 24454
+}
+
+
 variable "geyser_port" {
   description = "UDP port for Geyser"
   type = number
