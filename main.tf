@@ -284,5 +284,5 @@ resource "aws_route53_record" "minecraft" {
   name    = "minecraft.oliverj.io"
   type    = "A"
   ttl     = "300"
-  records = ["54.173.212.56"]
+  records = ["54.159.25.147"]
 }
