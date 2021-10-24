@@ -228,6 +228,13 @@ module "ec2_security_group" {
       cidr_blocks = var.allowed_cidrs
     },
     {
+      from_port   = var.secure_teradactyl_port
+      to_port     = var.secure_teradactyl_port
+      protocol    = "tcp"
+      description = "Teradactyl"
+      cidr_blocks = var.allowed_cidrs
+    },
+    {
       from_port   = var.geyser_port
       to_port     = var.geyser_port
       protocol    = "udp"

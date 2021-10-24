@@ -84,6 +84,12 @@ variable "teradactyl_port" {
   default = 80
 }
 
+variable "secure_teradactyl_port" {
+  description = "TCP port for Teradactyl"
+  type = number
+  default = 443
+}
+
 variable "geyser_port" {
   description = "UDP port for Geyser"
   type = number
