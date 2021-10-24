@@ -221,10 +221,10 @@ module "ec2_security_group" {
       cidr_blocks = var.allowed_cidrs
     },
     {
-      from_port   = var.puffer_port
-      to_port     = var.puffer_port
+      from_port   = var.teradactyl_port
+      to_port     = var.teradactyl_port
       protocol    = "tcp"
-      description = "Puffer Panel"
+      description = "Teradactyl"
       cidr_blocks = var.allowed_cidrs
     },
     {

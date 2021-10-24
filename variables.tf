@@ -78,10 +78,10 @@ variable "mc_port3" {
   default     = 25567
 }
 
-variable "puffer_port" {
-  description = "TCP port for Puffer Panel"
+variable "teradactyl_port" {
+  description = "TCP port for Teradactyl"
   type = number
-  default = 8080
+  default = 80
 }
 
 variable "geyser_port" {
