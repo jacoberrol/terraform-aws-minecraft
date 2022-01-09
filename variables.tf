@@ -41,6 +41,12 @@ variable "name" {
   default     = "minecraft"
 }
 
+variable "pt_name" {
+  description = "Name to use for servers, tags, etc (e.g. minecraft)"
+  type        = string
+  default     = "pterodactyl"
+}
+
 variable "namespace" {
   description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
   type        = string
@@ -157,6 +163,18 @@ variable "mc_backup_freq" {
   default     = 5
 }
 
+variable "pt_root" {
+  description = "Where to install pterodactyl on your instance"
+  type        = string
+  default     = "/home/pterodactyl"
+}
+
+variable "pt_backup_freq" {
+  description = "How often (mins) to sync to S3"
+  type        = number
+  default     = 5
+}
+
 // You'll want to tune these next two based on the instance type
 variable "java_ms_mem" {
   description = "Java initial and minimum heap size"
@@ -181,6 +199,12 @@ variable "ami" {
   description = "AMI to use for the instance - will default to latest Ubuntu"
   type        = string
   default     = "ami-013f17f36f8b1fefb"
+}
+
+variable "pt_ami" {
+  description = "AMI to use for the instance - will default to latest Ubuntu"
+  type        = string
+  default     = "ami-04505e74c0741db8d"
 }
 
 // https://aws.amazon.com/ec2/instance-types/

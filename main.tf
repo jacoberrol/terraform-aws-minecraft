@@ -68,6 +68,12 @@ resource "random_string" "s3" {
   upper   = false
 }
 
+resource "random_string" "pt_s3" {
+  length  = 12
+  special = false
+  upper   = false
+}
+
 #data "aws_s3_bucket" "selected" {
 #  bucket = local.bucket
 #}
@@ -76,6 +82,7 @@ locals {
   using_existing_bucket = signum(length(var.bucket_name)) == 1
 
   bucket = length(var.bucket_name) > 0 ? var.bucket_name : "${module.label.id}-${random_string.s3.result}"
+  pt_bucket = length(var.bucket_name) > 0 ? var.bucket_name : "${module.label.id}-${random_string.pt_s3.result}"
 }
 
 module "s3" {
@@ -84,6 +91,29 @@ module "s3" {
   create_bucket = local.using_existing_bucket ? false : true
 
   bucket = local.bucket
+  acl    = "private"
+
+  force_destroy = var.bucket_force_destroy
+
+  versioning = {
+    enabled = var.bucket_object_versioning
+  }
+
+  # S3 bucket-level Public Access Block configuration
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+
+  tags = module.label.tags
+}
+
+module "pt_s3" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+
+  create_bucket = local.using_existing_bucket ? false : true
+
+  bucket = local.pt_bucket
   acl    = "private"
 
   force_destroy = var.bucket_force_destroy
@@ -164,6 +194,16 @@ data "template_file" "user_data" {
     mc_type        = var.mc_type
     java_mx_mem    = var.java_mx_mem
     java_ms_mem    = var.java_ms_mem
+  }
+}
+
+data "template_file" "pt_user_data" {
+  template = file("${path.module}/pt_user_data.sh")
+
+  vars = {
+    pt_root        = var.pt_root
+    pt_bucket      = local.bucket
+    pt_backup_freq = var.pt_backup_freq
   }
 }
 
@@ -301,7 +341,27 @@ module "ec2_minecraft" {
 
   # network
   subnet_id                   = local.subnet_id
-  vpc_security_group_ids      = [ module.ec2_security_group.this_security_group_id ]
+  vpc_security_group_ids      = [ module.ec2_security_group.security_group_id ]
+  associate_public_ip_address = var.associate_public_ip_address
+
+  tags = module.label.tags
+}
+
+// EC2 instance for the server - tune instance_type to fit your performance and budget requirements
+module "ec2_pterodactyl" {
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-ec2-instance.git?ref=master"
+  name   = "${var.pt_name}-public"
+
+  # instance
+  key_name             = local._ssh_key_name
+  ami                  = var.pt_ami != "" ? var.pt_ami : data.aws_ami.ubuntu.image_id
+  instance_type        = var.instance_type
+  iam_instance_profile = aws_iam_instance_profile.mc.id
+  user_data            = data.template_file.pt_user_data.rendered
+
+  # network
+  subnet_id                   = local.subnet_id
+  vpc_security_group_ids      = [ module.ec2_security_group.security_group_id ]
   associate_public_ip_address = var.associate_public_ip_address
 
   tags = module.label.tags
